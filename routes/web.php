@@ -18,4 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::get('adm', 'HomeController@index');
+
+Route::get('volta',[
+  'as' => 'volta',
+  'uses' => 'VoltaController@volta'
+]);
+
+Route::get('adm',['as' => 'adm', 'uses' => 'HomeController@index']);
+
+Route::get('/altera', function () {
+    return view('editar.altera');
+});
