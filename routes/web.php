@@ -24,8 +24,4 @@ Route::get('volta',[
   'uses' => 'VoltaController@volta'
 ]);
 
-Route::get('adm',['as' => 'adm', 'uses' => 'HomeController@index']);
-
-Route::get('/altera', function () {
-    return view('editar.altera');
-});
+Route::get('/adm',['as' => 'adm', 'uses' => 'HomeController@index']);
