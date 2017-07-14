@@ -75,10 +75,33 @@
                 </div>
             </div>
         </nav>
-        @yield('content')
+        <br>
+        <div class="container">
+          <div class="pull-right">
+            <a href="{{ route('volta') }}" class="btn btn-primary"> Voltar</a>
+          </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Administração</div>
+
+                        <div class="panel-body">
+                              @yield('content')
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+          $(document).ready(function(){
+              $('#pesquisa').DataTable();
+          });
+        </script>
+
     </div>
 
     <!-- Scripts -->
+
     <script src="/js/app.js"></script>
 </body>
 </html>

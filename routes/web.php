@@ -25,3 +25,5 @@ Route::get('volta',[
 ]);
 
 Route::get('/adm',['as' => 'adm', 'uses' => 'HomeController@index']);
+
+Route::resource('editar', 'EditionController');
