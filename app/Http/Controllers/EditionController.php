@@ -27,7 +27,7 @@ class EditionController extends Controller
 
     $edition = Edition::orderBy('id', 'DESC')->paginate(1000);
 
-    return view('editar.index',compact('edition'));
+    return view('editar.index', compact('edition'));
 
   }
 

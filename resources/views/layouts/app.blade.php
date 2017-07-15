@@ -61,7 +61,7 @@
                 <ul class="dropdown-menu" role="menu">
                   <li>
                     <a href="{{ url('/logout') }}"
-                    onclick="event.preventDefault();
+                    onclick="event.getpreventDefault();
                     document.getElementById('logout-form').submit();">
                     Logout
                   </a>
