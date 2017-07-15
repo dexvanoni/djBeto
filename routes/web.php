@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('inicio');
+  return view('inicio');
 });
 
 Auth::routes();
@@ -26,4 +26,4 @@ Route::get('volta',[
 
 Route::get('/adm',['as' => 'adm', 'uses' => 'HomeController@index']);
 
-Route::resource('editar', 'EditionController');
+Route::resource('editar', 'EditionController', ['except' => 'show']);

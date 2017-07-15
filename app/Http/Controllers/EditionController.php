@@ -17,12 +17,21 @@ class EditionController extends Controller
 {
   private $edition;
 
-    public function __construct(Edition $edition)
-    {
-      $this->edition = $edition;
-    }
+  public function __construct(Edition $edition)
+  {
+    $this->edition = $edition;
+  }
 
-public function create(){
+  public function index()
+  {
+
+    $edition = Edition::orderBy('id', 'DESC')->paginate(1000);
+
+    return view('editar.index',compact('edition'));
+
+  }
+
+  public function create(){
 
     $edition = $this->edition->all();
 
@@ -185,9 +194,9 @@ public function create(){
       }
     }
 
-$edition = Edition::create($request->all());
+    $edition = Edition::create($request->all());
 
-  //move as imagens
+    //move as imagens
     if(Input::file('img_about')){
       File::move($img_about,public_path().'/images/id_img_about'.$edition->id.'.'.$ext_about);
       $edition->img_about = public_path().'/images/id_img_about'.$edition->id.'.'.$ext_about;
@@ -275,20 +284,20 @@ $edition = Edition::create($request->all());
       $edition->save;
     }
 
-  Session::flash('mensagem_create', 'Seu site foi atualizado com sucesso!');
+    Session::flash('mensagem_create', 'Seu site foi atualizado com sucesso!');
 
-  return redirect()->route('editar.index');
+    return redirect()->route('editar.index');
 
-}
+  }
 
-public function destroy($id){
+  public function destroy($id){
 
-  $edition = Edition::find($id);
+    $edition = Edition::find($id);
 
-  $edition->delete();
-  Session::flash('mensagem_del', "Antigas alterações deletadas com Sucesso!");
-  return redirect()->route('editar.index');
+    $edition->delete();
+    Session::flash('mensagem_del', "Antigas alterações deletadas com Sucesso!");
+    return redirect()->route('editar.index');
 
-}
+  }
 
 }
