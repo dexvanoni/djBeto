@@ -13,6 +13,7 @@
   <!-- Styles -->
   <link href="/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="/bst/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bootstrap.css" />
 
 
   <!-- Scripts -->

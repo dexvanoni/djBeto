@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
+@php
+  $caminho = '/images/';
+@endphp
   <div class="bs-example" data-example-id="hoverable-table">
     <table class="table table-hover" id="pesquisa">
       <thead>
@@ -16,10 +18,14 @@
         @foreach ($edition as $editions)
           <tr>
             <th scope="row">{{ $editions->id }}</th>
-            <td style="width: 30%" >{{ $editions->created_at }}</td>
-            <td style="width: 30%" >{{ $editions->updated_at }}</td>
-            <td style="width: 30%" >{{ $edition->img_about->getClientOriginalName() }}</td>
-            <td style="width: 20%" >
+            <td style="width: 30%" >{{ date('d/m/Y H:i', strtotime($editions->created_at)) }}</td>
+            <td style="width: 30%" >{{ date('d/m/Y H:i', strtotime($editions->updated_at)) }}</td>
+            <td style="width: 30%" >
+              <div class="thumbnail">
+                <img src="{!! url($caminho.$editions->img_about) !!}" style="heigth: 100%; width: 100%" alt="Imagem">
+              </div>
+            </td>
+            <td style="width: 40%" >
               <ul class="list-inline list-small">
                 <li title="Editar">
                     <a href="{{ route('editar.edit', ['editions' => $editions->id]) }}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>

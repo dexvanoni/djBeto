@@ -22,10 +22,21 @@ class EditionController extends Controller
     $this->edition = $edition;
   }
 
+  public function site(){
+
+    //fazer a pesquisa no banco e mandar pra view as pesquisas gravadas
+    $edition = Edition::all();
+    $editions = $edition->last();
+
+    return view('inicio', compact('editions'));
+
+  }
+
   public function index()
   {
 
     $edition = Edition::orderBy('id', 'DESC')->paginate(1000);
+
 
     return view('editar.index', compact('edition'));
 
@@ -198,10 +209,17 @@ class EditionController extends Controller
 
     //move as imagens
     if(Input::file('img_about')){
-      File::move($img_about,public_path().'/images/id_img_about'.$edition->id.'.'.$ext_about);
-      $edition->img_about = public_path().'/images/id_img_about'.$edition->id.'.'.$ext_about;
-      $edition->save;
+      $imageTempName = $request->file('img_about')->getPathname();
+      $imageName = $request->file('img_about')->getClientOriginalName();
+      $imageNameCorrect = 'id_img_about'.$edition->id.$imageName;
+      $path = public_path().'/images/';
+      $request->file('img_about')->move($path , $imageNameCorrect);
+      DB::table('editions')->where('img_about', $imageTempName)->update(['img_about' => $imageNameCorrect]);
     }
+    /*  File::move($img_about,public_path().'/images/id_img_about'.$edition->id.'.'.$ext_about);
+      $edition->img_about = '/images/id_img_about'.$edition->id.'.'.$ext_about;
+      $edition->save;
+    }*/
     if(Input::file('f1')){
       File::move($f1,public_path().'/images/id_f1'.$edition->id.'.'.$ext_f1);
       $edition->$f1 = public_path().'/images/id_f1'.$edition->id.'.'.$ext_f1;
